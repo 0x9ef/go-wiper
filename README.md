@@ -1,4 +1,5 @@
 # Go Wiper
+![image](https://user-images.githubusercontent.com/43169346/141783010-3463f82b-c1aa-4bb0-b662-72d4a9d09efa.png)
 
 You can use this tool like a library or a ready program. If you thought in some times about safely data erasing, you have a great open-source tool that can safely delete your secure data without any recovery possibilities.
 
