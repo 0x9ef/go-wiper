@@ -25,35 +25,33 @@ func Wipe(path string, rule *Rule) error {
 		return err
 	}
 
+	defer fd.Close()
 	fstat, err := fd.Stat()
 	if err != nil {
 		return err
 	}
 
-	defer fd.Close() // defer after file processing
 	fileSize := fstat.Size()
 	fileParts := uint64(math.Ceil(float64(fileSize) / float64(FileChunk))) // file parts can't be zero
 
-	// We are count number of passes from rule, then we range for
-	// counted times of passes and ranging over file parts for more efficient speed times
 	r := *rule
-	passes := len(r)
-	for pass := 0; pass < passes; pass++ {
-		// In some cases, we have to fill in data randomly from 0-255,
-		// so we resort to using GetRandomByte(255).
+	for _, pass := range r {
 		var data []byte
-		if r[pass].Random != 0 {
-			flag := r[pass].Random
-			b, err := GetRandomByte(255, flag)
+		if pass.Random != 0 {
+			// In some cases, we have to fill data randomly from 0-255,
+			// so we resort to using GetRandomByte(maxVal, flag).
+			flag := pass.Random
+			maxVal := uint8(255)
+			b, err := GetRandomByte(maxVal, flag)
 			if err != nil {
 				return err
 			}
 			data = []byte{b}
 		} else {
-			data = r[pass].Data
+			data = pass.Data
 		}
 
-		var dataSz = int(r[pass].Len)
+		var dataSz = int(pass.Len)
 		for i := uint64(0); i < fileParts; i++ {
 			partSize := int64(math.Min(FileChunk, float64(fileSize-int64(i*FileChunk))))
 			var overwriteData []byte
