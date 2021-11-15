@@ -34,7 +34,7 @@ func generateFile(path string, size int) {
 
 func TestSmall100KB(t *testing.T) {
 	rule := wipe.RuleFast
-	path := "C:/gowiper/tests/open_test_small100KB.bin"
+	path := "tests/open_test_small100KB.bin"
 	generateFile(path, _100KB)
 	if err := wipe.Wipe(path, rule); err != nil {
 		panic(err)
@@ -43,7 +43,7 @@ func TestSmall100KB(t *testing.T) {
 
 func TestSmall1MB(t *testing.T) {
 	rule := wipe.RuleFast
-	path := "C:/gowiper/tests/open_test_small1MB.bin"
+	path := "tests/open_test_small1MB.bin"
 	generateFile(path, _1MB)
 	if err := wipe.Wipe(path, rule); err != nil {
 		panic(err)
@@ -52,7 +52,7 @@ func TestSmall1MB(t *testing.T) {
 
 func TestLarge500MB(t *testing.T) {
 	rule := wipe.RuleFast
-	path := "C:/gowiper/tests/open_test_large500MB.bin"
+	path := "tests/open_test_large500MB.bin"
 	generateFile(path, _500MB)
 	if err := wipe.Wipe(path, rule); err != nil {
 		panic(err)
@@ -61,7 +61,7 @@ func TestLarge500MB(t *testing.T) {
 
 func TestLarge1GB(t *testing.T) {
 	rule := wipe.RuleFast
-	path := "C:/gowiper/tests/open_test_large1GB.bin"
+	path := "tests/open_test_large1GB.bin"
 	generateFile(path, _1GB)
 	if err := wipe.Wipe(path, rule); err != nil {
 		panic(err)
